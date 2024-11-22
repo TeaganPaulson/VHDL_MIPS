@@ -1,0 +1,17 @@
+-------- This is the 16 registers circuit for MIPS -----------------
+library ieee;
+use ieee.std_logic_1164.all;
+USE work.components.all;
+
+entity HazardUnit is
+	port( ID_EX_MemRead: std_logic;
+			ID_EX_RegisterRt, IF_ID_RegisterRs, IF_ID_RegisterRt : in std_logic_vector(3 downto 0);
+			Stall: out std_logic;
+end register_file;
+
+architecture struc_behaviour of HazardUnit is
+begin
+	
+	
+
+end struc_behaviour;

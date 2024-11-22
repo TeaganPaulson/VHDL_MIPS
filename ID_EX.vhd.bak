@@ -1,0 +1,30 @@
+-------- This is the 16 registers circuit for MIPS -----------------
+library ieee;
+use ieee.std_logic_1164.all;
+USE work.components.all;
+
+entity ID_EX is
+	port(clock, reset : in std_logic;
+			PC_in : in std_logic_vector(3 downto 0);
+			Instruct_in : in std_logic_vector(31 downto 0)
+			PC_out : out std_logic_vector(3 downto 0);
+			Instruct_out : out std_logic_vector(31 downto 0));
+end ID_EX;
+	signal PC_reg : std_logic_vector(3 downto 0) :="0000";
+	signal instruct_reg : std_logic_vector(31 downto 0) :="000000000000000000000000";
+architecture struc_behaviour of ID_EX is
+	process (clock)
+	begin
+		if clock'event and clock = '1' then
+				if reset = '1' then
+				PC_reg <= "0000";
+				Instruct_reg<="000000000000000000000000";
+				else
+				PC_reg <= PC_in;
+				Instruct_reg<=Instruct_in;
+				end if;
+		end if;
+	end process;
+	PC_out<=PC_reg;
+	Instruct_out<=instruct_reg;
+end struc_behaviour;

@@ -1,0 +1,50 @@
+-------- This is the 16 registers circuit for MIPS -----------------
+library ieee;
+use ieee.std_logic_1164.all;
+USE work.components.all;
+
+entity MEM_WB is
+	port(clock, reset : in std_logic;
+			Data1,Write_Destination,Data2: in std_logic_vector(3 downto 0);
+			RegWrite : in std_logic;
+			Instruct_in : in std_logic_vector(31 downto 0)
+			PC_out,Write_Destination_out : out std_logic_vector(3 downto 0);
+			RegWrite_out, branch_out,jump_out,MemWrite_out, zero_out,sum_out : out std_logic);
+end MEM_WB;
+	signal PC_reg, src1_reg,src2_reg,Write_Destination_reg : std_logic_vector(3 downto 0) :="0000";
+	signal Write_reg : std_logic_vector(4 downto 0) :="0000";
+	signal ALUOp_reg : std_logic_vector(2 downto 0) :="000";
+	signal RegWrite_reg,ALUsrc_reg,RegDst_reg, branch_reg,jump_reg,MemRead_reg,zero_reg : std_logic :='0';
+	signal instruct_reg : std_logic_vector(31 downto 0) :="000000000000000000000000";
+architecture struc_behaviour of MEM_WB is
+	process (clock)
+	begin
+		if clock'event and clock = '1' then
+				if reset = '1' then
+				PC_reg <= "0000";
+				RegWrite_reg<='0';
+				branch_reg<='0';
+				jump_reg<='0';
+				MemRead_reg<='0';
+				zero_reg<='0';
+				Write_Destination_reg<="0000";
+				else
+				PC_reg <= PC_in;
+				RegWrite_reg<=RegWrite;
+				RegDst_reg<=RegDst;
+				branch_reg<=branch;
+				jump_reg<=jump;
+				MemWrite_reg<=MemWrite;
+				zero_reg<=zero;
+				Write_Destination_reg<=Write_Destination;
+				end if;
+		end if;
+	end process;
+	MemWrite_out<=MemWrite_Reg;
+	PC_out<=PC_reg;
+	RegWrite_out<=RegWrite_reg;
+	branch_out<=branch_reg;
+	jump_out<=jump_reg;
+	zero_out<=zero_reg;
+	Write_Destination_out<=Write_Destination_reg;
+end struc_behaviour;

@@ -1,0 +1,17 @@
+-------- This is the 16 registers circuit for MIPS -----------------
+library ieee;
+use ieee.std_logic_1164.all;
+USE work.components.all;
+
+entity Forwarding_Unit is
+	port( MEM_WB_RegWrite: std_logic;
+			MEM_WB_RegisterRd, EX_MEM_RegWrite, EX_MEM_RegisterRd, ID_EX_RegisterRs, MEM_WB_RegisterRd, ID_EX_RegisterRt: in std_logic_vector(3 downto 0);
+			ForwardA, ForwardB : out std_logic_vector(3 downto 0));
+end register_file;
+
+architecture struc_behaviour of Forwarding_Unit is
+begin
+
+	
+
+end struc_behaviour;
